@@ -1,0 +1,60 @@
+---
+title: 从 0 到 LLM / Agent 算法工程师
+description: 一份面向想成为 LLM / Agent 算法工程师的读者的系统性中文教程
+template: splash
+hero:
+  tagline: 16 模块、87 节，从反向传播一路写到 R1 风格的 Reasoning Agent。理论、实现、工程三位一体。
+  actions:
+    - text: 开始阅读
+      link: /00-intro/01-landscape-and-roadmap/
+      icon: right-arrow
+      variant: primary
+    - text: 学习地图
+      link: /roadmap/
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## 你将学到什么
+
+<CardGrid stagger>
+  <Card title="基础与架构" icon="seti:default">
+    从反向传播、自动微分、PyTorch 工作流，一路写到 Transformer from scratch（mini-LLaMA），覆盖 RoPE、GQA、FlashAttention、MoE、SSM 等现代架构变体。
+  </Card>
+  <Card title="预训练与训练 Infra" icon="rocket">
+    数据管线（FineWeb / Dolma / DCLM）、Scaling Law、长上下文扩展（YaRN / LongRoPE）、训练并行（DDP / ZeRO / FSDP / TP / PP）、混合精度（bf16 / fp8）、Triton kernel。
+  </Card>
+  <Card title="后训练与 Reasoning" icon="setting">
+    SFT / PEFT（LoRA / QLoRA / DoRA）、RLHF（PPO / DPO / GRPO 全栈推导）、Reasoning Agent（DeepSeek-R1 / RLVR / long-CoT），含 reward hacking 工程踩坑专章。
+  </Card>
+  <Card title="Agent 全栈" icon="random">
+    Prompt / RAG / Function calling 应用层；ReAct / Tool Use Training / Planning / Memory / Multi-agent；多轮 Agent RL（Search-R1 / ReSearch / Agent-R1），到 Computer Use 与 GUI Agent。
+  </Card>
+</CardGrid>
+
+## 怎么用这本书
+
+每节都按统一结构组织：**Mental model → 公式推导 → PyTorch 代码 → 工程踩坑 → 必读 paper → 自测题**。配 261 道面试题反向索引与 200+ paper 主题双索引。
+
+<CardGrid>
+  <LinkCard title="🗺️ 学习地图" description="16 模块 / 87 节的完整大纲与三种推荐路径" href="/roadmap/" />
+  <LinkCard title="📚 论文清单" description="按主题与模块双索引的 200+ 篇必读 paper" href="/paper-list/" />
+  <LinkCard title="🎯 面试题索引" description="261 道自测题反向索引，含校招速成路线" href="/interview-index/" />
+  <LinkCard title="🚀 从这里开始" description="第 0 节：LLM/Agent 算法工程师在做什么 + 5 分钟跑通 demo" href="/00-intro/01-landscape-and-roadmap/" />
+</CardGrid>
+
+## 三种推荐路径
+
+| 你的情况 | 推荐路径 |
+|---|---|
+| 完全按顺序学 | 模块 0 → 16，全程跟代码 |
+| 已经会 DL 与 Transformer | 跳过模块 1–4，从模块 5 开始 |
+| 已经会预训 / SFT，想补 RL 与 Agent | 直接看模块 9–15 |
+| 准备校招或面试 | 先看 [面试题索引](/interview-index/) 找薄弱点 |
+| 只想读 paper | 看 [论文清单](/paper-list/)，50+ 必读 + 200+ 全量 |
+
+## 致谢
+
+参考过的经典材料：Stanford CS336 与 CS224N、CMU 11-711、Andrej Karpathy 的 "Neural Networks: Zero to Hero"、Sebastian Raschka 的《Build a Large Language Model from Scratch》、Hugging Face LLM Course、Full Stack LLM Bootcamp、DeepLearning.AI Agent 系列。

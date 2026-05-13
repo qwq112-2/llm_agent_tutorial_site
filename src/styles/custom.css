@@ -1,0 +1,474 @@
+/* =========================================================
+   Anthropic / Claude 风格定制
+   - Cream off-white 背景 + 暖深褐文字
+   - Serif 标题 (Source Serif Pro) + Inter 正文
+   - Muted 暖橙强调，不刺眼
+   - 大留白、细边框、克制、文学化
+   ========================================================= */
+
+/* 字体引入：Inter + Source Serif 4 (Anthropic Tiempos 替代) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+	--sl-font: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC',
+		'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+	--sl-font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+	--font-serif: 'Source Serif 4', 'Source Serif Pro', 'Songti SC', Georgia, serif;
+
+	--sl-content-width: 50rem;
+	--sl-content-pad-x: 1.75rem;
+	--sl-text-base: 1rem;
+	--sl-line-height: 1.75;
+}
+
+/* ------------- 浅色模式：Anthropic cream ------------- */
+:root[data-theme='light'] {
+	--sl-color-bg: #faf9f5;
+	--sl-color-bg-nav: #f5f3ec;
+	--sl-color-bg-sidebar: #f5f3ec;
+	--sl-color-bg-inline-code: #ede9df;
+
+	--sl-color-text: #1f1d1a;
+	--sl-color-text-accent: #b85c34;
+	--sl-color-white: #15110d;
+	--sl-color-gray-1: #1f1d1a;
+	--sl-color-gray-2: #4a4540;
+	--sl-color-gray-3: #6b6457;
+	--sl-color-gray-4: #8c857a;
+	--sl-color-gray-5: #b3ac9e;
+	--sl-color-gray-6: #d8d2c4;
+	--sl-color-gray-7: #ebe7dd;
+
+	--sl-color-accent-low: #f5e8df;
+	--sl-color-accent: #b85c34;
+	--sl-color-accent-high: #8a3d1f;
+
+	--sl-color-hairline: #e0dac9;
+	--sl-color-hairline-shade: #ebe7dd;
+}
+
+/* ------------- 深色模式：暖深褐 ------------- */
+:root[data-theme='dark'] {
+	--sl-color-bg: #1d1a16;
+	--sl-color-bg-nav: #181511;
+	--sl-color-bg-sidebar: #181511;
+	--sl-color-bg-inline-code: #2d2620;
+
+	--sl-color-text: #ebe7dd;
+	--sl-color-text-accent: #e8a07a;
+	--sl-color-white: #faf9f5;
+	--sl-color-gray-1: #ebe7dd;
+	--sl-color-gray-2: #c9c2b3;
+	--sl-color-gray-3: #9c9485;
+	--sl-color-gray-4: #756d5f;
+	--sl-color-gray-5: #4a443c;
+	--sl-color-gray-6: #2d2825;
+	--sl-color-gray-7: #1f1c19;
+
+	--sl-color-accent-low: #3a2820;
+	--sl-color-accent: #e8a07a;
+	--sl-color-accent-high: #f5c4a5;
+
+	--sl-color-hairline: #2d2825;
+	--sl-color-hairline-shade: #25211e;
+}
+
+/* ============= 全局排版 ============= */
+
+html, body {
+	font-family: var(--sl-font);
+	letter-spacing: -0.005em;
+}
+
+/* 标题层级：H1 / H2 用 Serif，H3+ 用 Inter */
+.sl-markdown-content h1,
+.sl-markdown-content h2 {
+	font-family: var(--font-serif);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.25;
+}
+
+.sl-markdown-content h1 {
+	font-size: 2.25rem;
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.sl-markdown-content h2 {
+	font-size: 1.6rem;
+	margin-top: 3rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.sl-markdown-content h3 {
+	font-family: var(--sl-font);
+	font-weight: 600;
+	font-size: 1.2rem;
+	letter-spacing: -0.015em;
+	margin-top: 2.25rem;
+}
+
+.sl-markdown-content h4 {
+	font-weight: 600;
+	font-size: 1.05rem;
+	margin-top: 1.75rem;
+	color: var(--sl-color-text);
+}
+
+/* 正文段落 */
+.sl-markdown-content p {
+	margin: 1rem 0;
+}
+
+/* ============= Hero（首页 splash）============= */
+
+.hero {
+	padding: 5rem 0 4rem !important;
+	gap: 2.5rem !important;
+}
+
+.hero h1 {
+	font-family: var(--font-serif) !important;
+	font-weight: 600 !important;
+	font-size: clamp(2.5rem, 5vw, 4rem) !important;
+	letter-spacing: -0.025em !important;
+	line-height: 1.1 !important;
+	color: var(--sl-color-white) !important;
+	background: none !important;
+	-webkit-text-fill-color: var(--sl-color-white) !important;
+	max-width: 18ch;
+}
+
+.hero .tagline {
+	font-size: 1.2rem !important;
+	line-height: 1.6 !important;
+	color: var(--sl-color-gray-2) !important;
+	max-width: 38rem;
+	font-weight: 400;
+}
+
+/* 按钮：Anthropic 风（不渐变、扁平、暖橙） */
+.hero .actions {
+	margin-top: 1.5rem !important;
+	gap: 0.75rem !important;
+}
+
+.sl-link-button {
+	border-radius: 0.5rem !important;
+	font-weight: 500 !important;
+	letter-spacing: 0 !important;
+	padding: 0.7rem 1.4rem !important;
+	font-size: 0.95rem !important;
+	transition: all 0.15s ease;
+	border: 1px solid transparent !important;
+}
+
+.sl-link-button.primary {
+	background-color: var(--sl-color-accent) !important;
+	color: #faf9f5 !important;
+	border-color: var(--sl-color-accent) !important;
+}
+
+.sl-link-button.primary:hover {
+	background-color: var(--sl-color-accent-high) !important;
+	transform: translateY(-1px);
+}
+
+.sl-link-button.minimal,
+.sl-link-button.secondary {
+	background-color: transparent !important;
+	color: var(--sl-color-text) !important;
+	border-color: var(--sl-color-hairline) !important;
+}
+
+.sl-link-button.minimal:hover,
+.sl-link-button.secondary:hover {
+	background-color: var(--sl-color-bg-sidebar) !important;
+	border-color: var(--sl-color-gray-4) !important;
+}
+
+/* ============= 卡片（Card / CardGrid）============= */
+
+.sl-link-card {
+	background-color: var(--sl-color-bg) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 0.75rem !important;
+	padding: 1.5rem !important;
+	transition: all 0.15s ease;
+	box-shadow: none !important;
+}
+
+.sl-link-card:hover {
+	border-color: var(--sl-color-accent) !important;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(31, 29, 26, 0.06) !important;
+}
+
+.sl-link-card .title {
+	font-family: var(--font-serif) !important;
+	font-weight: 600 !important;
+}
+
+.card {
+	background-color: var(--sl-color-bg) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 0.75rem !important;
+	padding: 1.5rem !important;
+	transition: all 0.15s ease;
+}
+
+.card:hover {
+	border-color: var(--sl-color-accent) !important;
+	box-shadow: 0 4px 12px rgba(31, 29, 26, 0.05) !important;
+}
+
+.card .title {
+	font-family: var(--font-serif) !important;
+	font-weight: 600 !important;
+	font-size: 1.1rem !important;
+}
+
+/* ============= Header（顶部 nav）============= */
+
+.header {
+	background-color: var(--sl-color-bg-nav) !important;
+	border-bottom: 1px solid var(--sl-color-hairline) !important;
+	backdrop-filter: blur(12px);
+}
+
+.site-title {
+	font-family: var(--font-serif) !important;
+	font-weight: 600 !important;
+	font-size: 1.05rem !important;
+	color: var(--sl-color-text) !important;
+}
+
+/* 搜索框 */
+button[data-open-modal] {
+	background-color: var(--sl-color-bg) !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	border-radius: 0.5rem !important;
+	color: var(--sl-color-gray-3) !important;
+	padding: 0.45rem 0.75rem !important;
+	font-size: 0.85rem !important;
+}
+
+button[data-open-modal]:hover {
+	border-color: var(--sl-color-gray-4) !important;
+}
+
+/* ============= Sidebar ============= */
+
+.sidebar-content {
+	padding: 1rem 0.5rem !important;
+}
+
+.sidebar-content nav > ul > li > a,
+.sidebar-content nav > ul > li > details > summary {
+	font-weight: 600 !important;
+	font-size: 0.85rem !important;
+	color: var(--sl-color-text) !important;
+	letter-spacing: 0;
+}
+
+.sidebar-content a {
+	font-size: 0.85rem !important;
+	color: var(--sl-color-gray-2) !important;
+	border-radius: 0.4rem !important;
+	transition: all 0.1s;
+}
+
+.sidebar-content a:hover {
+	background-color: var(--sl-color-accent-low) !important;
+	color: var(--sl-color-accent) !important;
+}
+
+.sidebar-content a[aria-current='page'] {
+	background-color: var(--sl-color-accent-low) !important;
+	color: var(--sl-color-accent-high) !important;
+	font-weight: 600 !important;
+}
+
+/* ============= 内容区 ============= */
+
+/* inline code */
+.sl-markdown-content :not(pre) > code {
+	background-color: var(--sl-color-bg-inline-code);
+	color: var(--sl-color-accent-high);
+	padding: 0.15rem 0.4rem;
+	border-radius: 0.3rem;
+	font-size: 0.88em;
+	font-weight: 500;
+	border: 1px solid var(--sl-color-hairline);
+}
+
+/* 表格 */
+.sl-markdown-content table {
+	font-size: 0.92rem;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	border: 1px solid var(--sl-color-hairline);
+}
+.sl-markdown-content thead {
+	background-color: var(--sl-color-bg-sidebar);
+}
+.sl-markdown-content th {
+	font-weight: 600;
+	font-family: var(--sl-font);
+	color: var(--sl-color-text);
+	text-align: left;
+}
+.sl-markdown-content td,
+.sl-markdown-content th {
+	padding: 0.6rem 0.85rem;
+	border-color: var(--sl-color-hairline);
+}
+
+/* 引用块 */
+.sl-markdown-content blockquote {
+	border-left: 3px solid var(--sl-color-accent);
+	background-color: var(--sl-color-bg-sidebar);
+	border-radius: 0 0.5rem 0.5rem 0;
+	padding: 0.85rem 1.25rem;
+	color: var(--sl-color-gray-2);
+	font-style: normal;
+	margin: 1.25rem 0;
+}
+
+/* details / summary */
+.sl-markdown-content details {
+	background-color: var(--sl-color-bg-sidebar);
+	border: 1px solid var(--sl-color-hairline);
+	border-radius: 0.6rem;
+	padding: 0.85rem 1.15rem;
+	margin: 1rem 0;
+}
+
+.sl-markdown-content details summary {
+	font-weight: 600;
+	cursor: pointer;
+	user-select: none;
+	color: var(--sl-color-text);
+}
+
+.sl-markdown-content details[open] {
+	background-color: var(--sl-color-bg);
+}
+
+/* 链接 */
+.sl-markdown-content a:not(.sl-link-button):not(.sl-link-card) {
+	color: var(--sl-color-accent);
+	text-decoration: none;
+	border-bottom: 1px solid var(--sl-color-accent-low);
+	transition: all 0.15s;
+	font-weight: 500;
+}
+
+.sl-markdown-content a:not(.sl-link-button):not(.sl-link-card):hover {
+	color: var(--sl-color-accent-high);
+	border-bottom-color: var(--sl-color-accent);
+}
+
+/* ul / ol */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+	margin: 1rem 0;
+	padding-left: 1.5rem;
+}
+
+.sl-markdown-content li {
+	margin: 0.4rem 0;
+}
+
+/* 代码块（expressive code）*/
+.expressive-code .frame {
+	border-radius: 0.6rem !important;
+	border: 1px solid var(--sl-color-hairline) !important;
+	box-shadow: none !important;
+}
+
+.expressive-code .frame.is-terminal {
+	background-color: var(--sl-color-bg-sidebar) !important;
+}
+
+/* KaTeX */
+.katex {
+	font-size: 1.05em;
+}
+.katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 0.75rem 0;
+	margin: 1.25rem 0;
+}
+
+/* hr 分隔线 */
+.sl-markdown-content hr {
+	border: none;
+	border-top: 1px solid var(--sl-color-hairline);
+	margin: 2.5rem 0;
+}
+
+/* 右侧 TOC */
+.right-sidebar {
+	font-size: 0.85rem;
+}
+
+.right-sidebar h2 {
+	font-family: var(--sl-font) !important;
+	font-size: 0.75rem !important;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--sl-color-gray-3) !important;
+}
+
+.right-sidebar a {
+	color: var(--sl-color-gray-3);
+	border-left: 2px solid transparent;
+	transition: all 0.1s;
+}
+
+.right-sidebar a:hover {
+	color: var(--sl-color-text);
+	border-left-color: var(--sl-color-hairline);
+}
+
+.right-sidebar a[aria-current='true'] {
+	color: var(--sl-color-accent);
+	border-left-color: var(--sl-color-accent);
+	font-weight: 500;
+}
+
+/* 页脚 */
+footer {
+	border-top: 1px solid var(--sl-color-hairline) !important;
+	color: var(--sl-color-gray-3);
+	font-size: 0.85rem;
+	padding-top: 2rem !important;
+}
+
+/* meta（last updated 等） */
+.meta {
+	color: var(--sl-color-gray-3);
+	font-size: 0.85rem;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--sl-color-hairline);
+	border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--sl-color-gray-5);
+}
